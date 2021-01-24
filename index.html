@@ -20,6 +20,7 @@
   </head>
 
   <body>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <span id="title-span" style="margin: auto" class="navbar-brand mb-0 h1"
@@ -28,8 +29,10 @@
       </div>
     </nav>
 
+    <!-- wrapper for entire page -->
     <div class="container-fluid wrapper">
       <div class="row">
+        <!-- side nav bar with search bar and results -->
         <div
           id="search-col"
           class="col-sm-12 col-md-4 col-lg-4 container-fluid"
@@ -50,6 +53,8 @@
               </button>
             </div>
           </div>
+
+          <!-- Search results  -->
           <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="card" id="city-list" style="width: auto">
               <ul class="list-group list-group-flush">
@@ -63,30 +68,33 @@
             </div>
           </div>
         </div>
+
+        <!-- box with weather for chosen city and current day  -->
         <div id="info-box" class="col-sm-12 col-md-8 col-lg-8">
           <div class="row">
             <div class="col-sm-12">
               <div id="weather-box" class="card">
                 <div class="card-body">
                   <h5 class="card-title">Date(api) (current weather icon)</h5>
-                  <p class="card-text">
-                    <br />
-                    temperature <br />
-                    <br />
-                    humidity <br /><br />
-                    Wind Speed <br /><br />
-                    uv index (color code)<br /><br />
-                  </p>
+                  <ul class="card-text">
+                    <br><li>temperature </li> <br>  
+                    <li>humidity</li><br>
+                    <li>Wind Speed</li><br>
+                    <li>uv index <span id="uv-color">(color code)</span></li><br>
+                  </ul>
                 </div>
               </div>
             </div>
+
+            <!-- forecast cards  -->
+
             <h3 id="day-forecast ">5 Day Forecast</h3>
             <div class="row">
               <div class="col-sm-4 col-md-2 col-lg-2 forecast">
                 <div class="card text-white bg-primary mb-3" style="">
                   <div class="card-header">Date</div>
-                  <div class="day-forecast">
-                    <ul class="card-text">
+                  <div class="day-forecast" >
+                    <ul class="card-text" id="1">
                       <li>icon</li>
                       <li>temp</li>
                       <li>humidity</li>
@@ -97,8 +105,8 @@
               <div class="col-sm-4 col-md-2 col-lg-2 forecast">
                 <div class="card text-white bg-primary mb-3" style="">
                   <div class="card-header">Date</div>
-                  <div class="card-body day-forecast">
-                    <ul class="card-text">
+                  <div class=" day-forecast" >
+                    <ul class="card-text" id="2">
                       <li>icon</li>
                       <li>temp</li>
                       <li>humidity</li>
@@ -109,8 +117,8 @@
               <div class="col-sm-4 col-md-2.4 col-lg-2 forecast">
                 <div class="card text-white bg-primary mb-3" style="">
                   <div class="card-header">Date</div>
-                  <div class="card-body day-forecast">
-                    <ul class="card-text">
+                  <div class=" day-forecast">
+                    <ul class="card-text" id="3">
                       <li>icon</li>
                       <li>temp</li>
                       <li>humidity</li>
@@ -121,8 +129,8 @@
               <div class="col-sm-4 col-md-2 col-lg-2 forecast">
                 <div class="card text-white bg-primary mb-3">
                   <div class="card-header">Date</div>
-                  <div class="card-body day-forecast">
-                    <ul class="card-text">
+                  <div class=" day-forecast">
+                    <ul class="card-text" id="4">
                       <li>icon</li>
                       <li>temp</li>
                       <li>humidity</li>
@@ -133,8 +141,8 @@
               <div class="col-sm-4 col-md-2 col-lg-2 forecast">
                 <div class="card text-white bg-primary mb-3" style="">
                   <div class="card-header">Date</div>
-                  <div class="card-body day-forecast">
-                    <ul class="card-text">
+                  <div class=" day-forecast">
+                    <ul class="card-text" id="5">
                       <li>icon</li>
                       <li>temp</li>
                       <li>humidity</li>
@@ -144,12 +152,13 @@
               </div>
             </div>
             <!-- end row for nested cards  -->
-            <!-- </div> -->
+          
           </div>
         </div>
       </div>
     </div>
-
+    
+    <footer class="footer mt-auto py-3""></footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
