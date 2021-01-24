@@ -1,0 +1,28 @@
+body {
+  box-sizing: border-box;
+  margin: 0px;
+}
+.container {
+  width: 100%;
+  margin: 0;
+}
+
+#search-col {
+  margin: 5px;
+  background-color: rgb(252, 252, 252);
+  padding: 20px;
+}
+h4 {
+  margin-top: 10px;
+}
+
+.city-list {
+  padding: 20px;
+}
+
+#weather-box {
+  width: 500px;
+}
+
+.info-col {
+}
