@@ -4,17 +4,17 @@ body {
   font-family: sans-serif;
   font-size: 16px;
 }
-.wrapper {
+.main-cont {
   width: 100%;
   margin: auto;
   border: 0.5px solid black;
-  height: auto;
+  height: 100vh;
   padding: 0px;
 }
-.title-span {
+/* .title-span {
   margin: auto;
   font-size: 24px;
-}
+} */
 #search-col {
   margin: 5px;
   background-color: rgb(252, 252, 252);
@@ -55,11 +55,9 @@ p {
 .forecast {
   transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
   padding: 10px;
-  margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
-  width: auto;
+  width: 20%;
   float: right;
-
   margin: auto;
 }
 
@@ -86,6 +84,7 @@ li {
 
 element.style {
 }
+
 .card-body {
   flex: 1 1 auto;
   padding: 1rem 1rem;
@@ -95,13 +94,15 @@ footer {
   width: 100%;
   height: 25px;
   border: 1px solid black;
+  position: fixed;
+  bottom: 0px;
 }
 
 .text-white {
   color: #fff !important;
 }
 .day-forecast {
-  padding: 20px;
+  padding: 20px 20px 20px 5px;
 }
 
 /* media only screen and (min-width: 993px) .row .col.l4 {
