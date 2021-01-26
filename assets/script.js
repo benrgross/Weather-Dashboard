@@ -18,7 +18,7 @@ getCities();
 function singleDay(chosenCity) 
 
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     chosenCity +
     "&appid=" +
     APIKey;
