@@ -47,7 +47,7 @@ function singleDay(chosenCity) {
     var currentDate = moment().format("L");
     $("#current-date").text(response.name + " " + currentDate);
 
-    // ------ Condtions for weather icon
+    // ------ Conditions for weather icon
     if (currentCondition === "Rain") {
       var weatherIcon = $(
         `<img id="current-icon" src="http://openweathermap.org/img/wn/09d.png" />`
@@ -82,8 +82,9 @@ function singleDay(chosenCity) {
       $("#add-icon").prepend(weatherIcon);
       console.log(weatherIcon);
     }
-
+    // ----- City And Date ------------------
     $("#current-date").text(response.name + " " + currentDate);
+
     // Temperature -----------------
     tempKelvin = response.main.temp;
     temp = Math.round((Number(tempKelvin) - 273.15) * 1.8 + 32);
@@ -146,13 +147,16 @@ function singleDay(chosenCity) {
 }
 // --------------- Button Events --------------------
 
-$(".list-group-item").click(function () {
-  console.log("click");
-  $("#current-icon").remove();
-  chosenCity = $(this).text();
-  console.log("list city", chosenCity);
-  singleDay(chosenCity);
-});
+function renderCityHistory() {
+  $(".list-group-item").click(function () {
+    console.log("click");
+    $("#current-icon").remove();
+    chosenCity = $(this).text();
+    console.log("list city", chosenCity);
+    singleDay(chosenCity);
+  });
+}
+renderCityHistory();
 
 // When search button clicked, find city and retrieve info from API
 $(".btn").click(function (event) {
@@ -163,13 +167,13 @@ $(".btn").click(function (event) {
   console.log("chosen city", chosenCity);
 
   var addCity = $("<button>");
-  addCity.text(chosenCity).attr("class", "list-group-item");
+  addCity.text(chosenCity).attr("class", "list-group-item btn");
   $(".city").append(addCity);
 
   // store city local storage
   storeCity.push(chosenCity);
   localStorage.setItem("cities", JSON.stringify(storeCity));
-
+  renderCityHistory();
   singleDay(chosenCity);
 });
 
