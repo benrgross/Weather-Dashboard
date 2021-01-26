@@ -109,6 +109,22 @@ footer {
   padding: 20px 20px 20px 5px;
 }
 
+.uv-high {
+  background-color: red;
+}
+
+.uv-medHigh {
+  background-color: orange;
+}
+
+.uv-med {
+  background-color: yellow;
+}
+
+.uv-low {
+  background-color: greenyellow;
+}
+
 /* media only screen and (min-width: 993px) .row .col.l4 {
   width: 33.3333333333%;
   margin-left: auto;

@@ -1,9 +1,19 @@
 // --- RetRETRIEVE WEATHER INFO ----
 moment().format("L");
 
-// We then created an AJAX call
+//  AJAX call variables
 var APIKey = "b833b868df96016cabebdb7a4ca15977";
 var storeCity = JSON.parse(localStorage.getItem("cities")) || [];
+
+// load previously searched cities from local storage
+function getCities() {
+  for (i = 0; i < storeCity.length; i++) {
+    var addCity = $("<button>");
+    addCity.text(storeCity[i]).attr("class", "list-group-item");
+    $(".city").append(addCity);
+  }
+}
+getCities();
 
 function singleDay(chosenCity) {
   // Here we are building the URL we need to query the database
@@ -20,13 +30,13 @@ function singleDay(chosenCity) {
     console.log(response);
 
     // add searched city to search result element
-    var addCity = $("<li>");
-    addCity.text(response.name).attr("class", "list-group-item");
-    $(".city").append(addCity);
+    // var addCity = $("<button>");
+    // addCity.text(response.name).attr("class", "list-group-item");
+    // $(".city").append(addCity);
 
     // store city local storage
-    storeCity.push(response.name);
-    localStorage.setItem("cities", JSON.stringify(storeCity));
+    // storeCity.push(response.name);
+    // localStorage.setItem("cities", JSON.stringify(storeCity));
 
     // ----------------- Add Current Weather Data to Page ------------------
 
@@ -36,7 +46,7 @@ function singleDay(chosenCity) {
     // Temperature -----------------
     tempKelvin = response.main.temp;
     temp = Math.round((Number(tempKelvin) - 273.15) * 1.8 + 32);
-    $("#temp").text("Temperature :" + temp + "°F");
+    $("#temp").text("Temperature: " + temp + "°F");
     console.log("temp", temp);
 
     // Humidity ------------------
@@ -46,21 +56,62 @@ function singleDay(chosenCity) {
     $("#wind").text("Wind Speed: " + response.wind.speed + " mph");
 
     //UV---------------
+    var lon = response.coord.lon;
+    var lat = response.coord.lat;
+    var APIkey = "b833b868df96016cabebdb7a4ca15977";
+    uvURL =
+      "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+      lat +
+      "&lon=" +
+      lon +
+      "&appid=" +
+      APIkey;
+    $.ajax({
+      url: uvURL,
+      method: "GET",
+    }).then(function (response) {
+      console.log("uv", response.value);
+      $("#uv").text("uv:    ");
+
+      if (response.value <= 2) {
+        var uvSpan = $("<span>");
+        uvSpan.text(response.value).css("background-color", "greenyellow");
+        $("#uv").append(uvSpan);
+      }
+      if (response.value > 2 && response.value <= 5) {
+        var uvSpan = $("<span>");
+        uvSpan.text(response.value).css("background-color", "yellow");
+        $("#uv").append(uvSpan);
+      }
+      if (response.value > 5 && response.value <= 7) {
+        var uvSpan = $("<span>");
+        uvSpan.text(response.value).css("background-color", "orange");
+        $("#uv").append(uvSpan);
+      }
+      if (response.value > 7 && response.value <= 11) {
+        var uvSpan = $("<span>");
+        uvSpan.text(response.value).css("background-color", "red");
+        $("#uv").append(uvSpan);
+      }
+    });
+
+    // for (i = 0; i < storeCity.legnth; i++) {
+    //   if (storedCity[i] !== response.name) {
+    //     storeCity.push(response.name);
+    //     localStorage.setItem("cities", JSON.stringify(storeCity));
+    //   }
+    // }
   });
 }
-
-// load previously searched cities from local storage
-function getCities() {
-  for (i = 0; i < storeCity.length; i++) {
-    var addCity = $("<button>");
-    addCity.text(storeCity[i]).attr("class", "list-group-item");
-    $(".city").append(addCity);
-  }
-}
-
-getCities();
-
 // --------------- Button Events --------------------
+
+$(".list-group-item").click(function () {
+  console.log("click");
+  chosenCity = $(this).text();
+  console.log("list city", chosenCity);
+  singleDay(chosenCity);
+});
+
 // When search button clicked, find city and retrieve info from API
 $(".btn").click(function (event) {
   event.preventDefault();
@@ -68,15 +119,18 @@ $(".btn").click(function (event) {
   chosenCity = $(this).parent().find("#search").val();
   console.log("chosen city", chosenCity);
 
+  var addCity = $("<button>");
+  addCity.text(chosenCity).attr("class", "list-group-item");
+  $(".city").append(addCity);
+
+  // store city local storage
+  storeCity.push(chosenCity);
+  localStorage.setItem("cities", JSON.stringify(storeCity));
+
   singleDay(chosenCity);
 });
 
 // Select city from list ----------------
-
-$(".list-group-item").click(function () {
-  chosenCity = $(this).text();
-  console.log("list city", chosenCity);
-});
 
 // -- connect to form and save text in variable chosenCity
 
