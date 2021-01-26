@@ -15,10 +15,10 @@ function getCities() {
 }
 getCities();
 
-function singleDay(chosenCity) {
-  // Here we are building the URL we need to query the database
+function singleDay(chosenCity) 
+
   var queryURL =
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    "http://api.openweathermap.org/data/2.5/weather?q=" +
     chosenCity +
     "&appid=" +
     APIKey;
