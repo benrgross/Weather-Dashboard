@@ -3,8 +3,8 @@ moment().format("L");
 
 //  AJAX call variables
 var APIKey = "b833b868df96016cabebdb7a4ca15977";
-var storeCity = JSON.parse(localStorage.getItem("cities")) || [];
-
+var storeCity = JSON.parse(localStorage.getItem("cities")) || ["New York"];
+var chosenCity = " ";
 // load previously searched cities from local storage
 function getCities() {
   for (i = 0; i < storeCity.length; i++) {
@@ -28,7 +28,6 @@ function singleDay(chosenCity) {
     method: "GET",
   }).then(function (response) {
     console.log(response);
-
     // ----------------- Add Current Weather Data to Page ------------------
 
     // City and Date ----------------
@@ -127,15 +126,11 @@ function singleDay(chosenCity) {
         $("#uv").append(uvSpan);
       }
     });
-
-    // for (i = 0; i < storeCity.legnth; i++) {
-    //   if (storedCity[i] !== response.name) {
-    //     storeCity.push(response.name);
-    //     localStorage.setItem("cities", JSON.stringify(storeCity));
-    //   }
-    // }
   });
 }
+
+// ------------------ Five Day Forecast ---------------
+
 // --------------- Button Events --------------------
 
 function renderCityHistory() {
@@ -173,7 +168,7 @@ $(".btn").click(function (event) {
   }
 
   // store city local storage
-  if (chosenCity) {
+  if (!chosenCity) {
     storeCity.push(chosenCity);
     localStorage.setItem("cities", JSON.stringify(storeCity));
     renderCityHistory();
