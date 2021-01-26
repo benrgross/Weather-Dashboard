@@ -129,14 +129,14 @@ function singleDay(chosenCity)
 // ------------------ Five Day Forecast ---------------
 
 function fiveDayForecast(chosenCity) {
-  var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" +
+  var fiveDayQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" +
     chosenCity +
     "&appid=" +
     APIKey +
     "&units=imperial";
   // ajax call
   $.ajax({
-    url: queryURL,
+    url: fiveDayQueryURL,
     method: "GET",
   }).then(function (response) {
     console.log(response);
