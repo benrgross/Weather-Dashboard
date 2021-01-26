@@ -17,8 +17,7 @@ getCities();
 
 function singleDay(chosenCity) 
 
-  var queryURL =
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
     chosenCity +
     "&appid=" +
     APIKey;
@@ -129,7 +128,7 @@ function singleDay(chosenCity)
 // ------------------ Five Day Forecast ---------------
 
 function fiveDayForecast(chosenCity) {
-  var fiveDayQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" +
+  var fiveDayQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" +
     chosenCity +
     "&appid=" +
     APIKey +
