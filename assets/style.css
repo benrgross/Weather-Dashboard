@@ -53,7 +53,6 @@ p {
 }
 
 .list-group-item {
-  clear: both;
   text-align: left;
   margin-left: 10px;
 }
@@ -128,15 +127,17 @@ footer {
 
 #current-icon {
   clear: both;
+  float: left;
   position: relative;
-  top: 5px;
-  left: 20px;
+  top: 10px;
+  height: 40px;
+  width: 40px;
 }
 
 #current-date {
   position: relative;
   top: 20px;
-  float: left;
+  margin-bottom: 20px;
 }
 
 /* media only screen and (min-width: 993px) .row .col.l4 {

@@ -52,9 +52,7 @@ function singleDay(chosenCity) {
       var weatherIcon = $(
         `<img id="current-icon" src="http://openweathermap.org/img/wn/09d.png" />`
       );
-      weatherIcon
-        .attr("style", "height: 60px; width: 60px")
-        .attr("class", "icon img");
+      weatherIcon.attr("class", "icon img");
       $("#add-icon").prepend(weatherIcon);
       console.log("rain");
       console.log(weatherIcon);
@@ -63,35 +61,24 @@ function singleDay(chosenCity) {
       var weatherIcon = $(
         `<img id="current-icon" src="http://openweathermap.org/img/wn/03d.png" />`
       );
-      weatherIcon
-        .attr("style", "height: 60px; width: 60px")
-        .attr("class", "icon img");
       $("#add-icon").prepend(weatherIcon);
       console.log("clouds");
     } else if (currentCondition === "Clear") {
       var weatherIcon = $(
         `<img id="current-icon" src="http://openweathermap.org/img/wn/01d.png" />`
       );
-      weatherIcon
-        .attr("style", "height: 60px; width: 60px")
-        .attr("class", "icon img");
+      weatherIcon.attr("class", "icon img");
       $("#add-icon").prepend(weatherIcon);
       console.log("clear");
     } else if (currentCondition === "Drizzle") {
       var weatherIcon = $(
         `<img id="current-icon" src="http://openweathermap.org/img/wn/10d.png" />`
       );
-      weatherIcon
-        .attr("style", "height: 60px; width: 60px")
-        .attr("class", "icon img");
       $("#add-icon").prepend(weatherIcon);
     } else if (currentCondition === "Snow") {
       var weatherIcon = $(
         `<img id="current-icon" src="http://openweathermap.org/img/wn/13d.png" />`
       );
-      weatherIcon
-        .attr("style", "height: 60px; width: 60px")
-        .attr("class", "icon img");
       $("#add-icon").prepend(weatherIcon);
       console.log(weatherIcon);
     }
