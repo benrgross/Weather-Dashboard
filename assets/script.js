@@ -29,15 +29,6 @@ function singleDay(chosenCity) {
   }).then(function (response) {
     console.log(response);
 
-    // add searched city to search result element
-    // var addCity = $("<button>");
-    // addCity.text(response.name).attr("class", "list-group-item");
-    // $(".city").append(addCity);
-
-    // store city local storage
-    // storeCity.push(response.name);
-    // localStorage.setItem("cities", JSON.stringify(storeCity));
-
     // ----------------- Add Current Weather Data to Page ------------------
 
     // City and Date ----------------
@@ -151,6 +142,10 @@ function renderCityHistory() {
   $(".list-group-item").click(function () {
     console.log("click");
     $("#current-icon").remove();
+    $("#temp").text("");
+    $("#hum").text("");
+    $("#wind").text("");
+    $("#uv").text("");
     chosenCity = $(this).text();
     console.log("list city", chosenCity);
     singleDay(chosenCity);
@@ -161,20 +156,29 @@ renderCityHistory();
 // When search button clicked, find city and retrieve info from API
 $(".btn").click(function (event) {
   event.preventDefault();
+  // clear old data
   $("#current-icon").remove();
+  $("#temp").empty();
+  $("#hum").empty();
+  $("#wind").empty();
+  $("#uv").empty();
 
   chosenCity = $(this).parent().find("#search").val();
   console.log("chosen city", chosenCity);
 
-  var addCity = $("<button>");
-  addCity.text(chosenCity).attr("class", "list-group-item btn");
-  $(".city").append(addCity);
+  if (chosenCity) {
+    var addCity = $("<button>");
+    addCity.text(chosenCity).attr("class", "list-group-item btn");
+    $(".city").append(addCity);
+  }
 
   // store city local storage
-  storeCity.push(chosenCity);
-  localStorage.setItem("cities", JSON.stringify(storeCity));
-  renderCityHistory();
-  singleDay(chosenCity);
+  if (chosenCity) {
+    storeCity.push(chosenCity);
+    localStorage.setItem("cities", JSON.stringify(storeCity));
+    renderCityHistory();
+    singleDay(chosenCity);
+  }
 });
 
 // Select city from list ----------------
