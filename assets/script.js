@@ -129,8 +129,7 @@ function singleDay(chosenCity)
 // ------------------ Five Day Forecast ---------------
 
 function fiveDayForecast(chosenCity) {
-  var queryURL =
-    "https://api.openweathermap.org/data/2.5/forecast?q=" +
+  var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" +
     chosenCity +
     "&appid=" +
     APIKey +
