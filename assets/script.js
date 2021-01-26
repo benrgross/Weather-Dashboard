@@ -3,8 +3,8 @@ moment().format("L");
 
 //  AJAX call variables
 var APIKey = "b833b868df96016cabebdb7a4ca15977";
-var storeCity = JSON.parse(localStorage.getItem("cities")) || ["New York"];
-var chosenCity = " ";
+var storeCity = JSON.parse(localStorage.getItem("cities")) || [];
+
 // load previously searched cities from local storage
 function getCities() {
   for (i = 0; i < storeCity.length; i++) {
@@ -28,6 +28,7 @@ function singleDay(chosenCity) {
     method: "GET",
   }).then(function (response) {
     console.log(response);
+
     // ----------------- Add Current Weather Data to Page ------------------
 
     // City and Date ----------------
@@ -40,40 +41,36 @@ function singleDay(chosenCity) {
     // ------ Conditions for weather icon
     if (currentCondition === "Rain") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/09d.png" />`
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/09d.png" alt="rain-icon" />`
       );
-      weatherIcon.attr("class", "icon img");
       $("#add-icon").prepend(weatherIcon);
-      console.log("rain");
-      console.log(weatherIcon);
     }
     if (currentCondition === "Clouds") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/03d.png" />`
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/03d.png" alt="cloud-icon"/>`
       );
       $("#add-icon").prepend(weatherIcon);
       console.log("clouds");
     } else if (currentCondition === "Clear") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/01d.png" />`
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/01d.png" alt="sun-icon" />`
       );
       weatherIcon.attr("class", "icon img");
       $("#add-icon").prepend(weatherIcon);
       console.log("clear");
     } else if (currentCondition === "Drizzle") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/10d.png" />`
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/10d.png" alt="drizzle icon" />`
       );
       $("#add-icon").prepend(weatherIcon);
     } else if (currentCondition === "Snow") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/13d.png" />`
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/13d.png" alt="snow-icon" />`
       );
       $("#add-icon").prepend(weatherIcon);
-      console.log(weatherIcon);
     }
     // ----- City And Date ------------------
-    $("#current-date").text(response.name + " " + currentDate);
+    $("#current-date").text(response.name + " " + "(" + currentDate + ")");
 
     // Temperature -----------------
     tempKelvin = response.main.temp;
@@ -103,7 +100,7 @@ function singleDay(chosenCity) {
       method: "GET",
     }).then(function (response) {
       console.log("uv", response.value);
-      $("#uv").text("uv:    ");
+      $("#uv").text("UV-Index:    ");
 
       if (response.value <= 2) {
         var uvSpan = $("<span>");
@@ -131,6 +128,77 @@ function singleDay(chosenCity) {
 
 // ------------------ Five Day Forecast ---------------
 
+function fiveDayForecast(chosenCity) {
+  var queryURL =
+    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+    chosenCity +
+    "&appid=" +
+    APIKey +
+    "&units=imperial";
+  // ajax call
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
+    forecast = response.list;
+    console.log("forecast", forecast);
+
+    // --------------------empty div
+    $("#five-day").empty();
+
+    // --------------------make for loop
+    for (i = 0; i < forecast.length; i += 8) {
+      console.log("response.list[i]", response.list[i].dt_txt);
+      //------------------make div
+      fiveDayDiv = $(
+        "<div class='card shadow text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>"
+      );
+      //------------------------make vars for data
+      var dataDate = forecast[i].dt_txt;
+      var orderDate = dataDate.substr(0, 10);
+      var date = orderDate.substr(5, 10) + "-2021";
+
+      var temp = forecast[i].main.temp;
+      var humidity = forecast[i].main.humidity;
+
+      // construct elements
+      disDate = $("<h5 class:'card-title'>").text(date);
+      disTemp = $("<p class='card-text'>").text("Temperature: " + temp + "°F");
+      disHum = $("<p class='card-text'>").text("Humidity: " + humidity + "%");
+
+      weatherConditions = forecast[i].weather[0].main;
+
+      if (weatherConditions === "Clear") {
+        var forecastIcon = $(
+          `<img class="icon-img" src="http://openweathermap.org/img/wn/01d.png" alt="sun-icon" />`
+        );
+      } else if (weatherConditions === "Clouds") {
+        var forecastIcon = $(
+          `<img class="icon-img" src="http://openweathermap.org/img/wn/03d.png" alt="cloud-icon"/>`
+        );
+      } else if (weatherConditions === "Rain") {
+        var forecastIcon = $(
+          `<img class="icon-img" src="http://openweathermap.org/img/wn/09d.png" alt="rain-icon" />`
+        );
+      } else if (weatherConditions === "Drizzle") {
+        var forecastIcon = $(
+          `<img class="icon-img" src="http://openweathermap.org/img/wn/10d.png" alt="drizzle icon" />`
+        );
+      } else if (weatherConditions === "Snow") {
+        var forecastIcon = $(
+          `<img class="icon-img" src="http://openweathermap.org/img/wn/13d.png" alt="snow-icon" />`
+        );
+      }
+      fiveDayDiv.append(date);
+      fiveDayDiv.append(forecastIcon);
+      fiveDayDiv.append(disTemp);
+      fiveDayDiv.append(disHum);
+      $("#five-day").append(fiveDayDiv);
+    }
+  });
+}
+
 // --------------- Button Events --------------------
 
 function renderCityHistory() {
@@ -144,6 +212,7 @@ function renderCityHistory() {
     chosenCity = $(this).text();
     console.log("list city", chosenCity);
     singleDay(chosenCity);
+    fiveDayForecast(chosenCity);
   });
 }
 renderCityHistory();
@@ -168,12 +237,12 @@ $(".btn").click(function (event) {
   }
 
   // store city local storage
-  if (!chosenCity) {
-    storeCity.push(chosenCity);
-    localStorage.setItem("cities", JSON.stringify(storeCity));
-    renderCityHistory();
-    singleDay(chosenCity);
-  }
+  storeCity.push(chosenCity);
+  localStorage.setItem("cities", JSON.stringify(storeCity));
+
+  renderCityHistory();
+  singleDay(chosenCity);
+  fiveDayForecast(chosenCity);
 });
 
 // Select city from list ----------------

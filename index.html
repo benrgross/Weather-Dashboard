@@ -36,7 +36,7 @@
         <!-- side nav bar with search bar and results -->
         <div
           id="search-col"
-          class="col-sm-12 col-md-4 col-lg-4 container-fluid"
+          class="shadow col-sm-12 col-md-4 col-lg-4 container-fluid shadow"
         >
           <!-- search bar  -->
           <h4>Search City</h4>
@@ -45,12 +45,12 @@
               <input
                 id="search"
                 type="search"
-                class="form-control search"
+                class=" shadow form-control search"
                 placeholder="Search City"
                 aria-label="Recipient's username"
                 aria-describedby="button-addon2"
               />
-              <button type="submit"  class="btn btn-primary">
+              <button type="submit"  class="shadow btn btn-primary">
                 <i class="fas fa-search"></i>
               </button>
             </div>
@@ -70,7 +70,7 @@
         <div id="info-box" class="col-sm-12 col-md-8 col-lg-8">
           <div class="row">
             <div class="col-sm-12">
-              <div id="weather-box" class="card">
+              <div id="weather-box" class="card shadow">
                 <div id="add-icon" class="card-body">
                   <h5 class="card-title" id="current-date"> Search A City!
                   </h5>
@@ -84,72 +84,12 @@
               </div>
             </div>
 
-            <!-- forecast cards  -->
+            <!-- forecast cards col  -->
 
-            <h3 id="day-forecast ">5 Day Forecast</h3>
-            <div class="row">
-              <div class="col-sm-4 col-md-2 col-lg-2 forecast">
-                <div class="card text-white bg-primary mb-3" style="">
-                  <div class="card-header">Date</div>
-                  <div class="day-forecast" >
-                    <ul class="card-text" id="1">
-                      <li>icon</li>
-                      <li>temp</li>
-                      <li>humidity</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4 col-md-2 col-lg-2 forecast">
-                <div class="card text-white bg-primary mb-3" style="">
-                  <div class="card-header">Date</div>
-                  <div class=" day-forecast" >
-                    <ul class="card-text" id="2">
-                      <li>icon</li>
-                      <li>temp</li>
-                      <li>humidity</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4 col-md-2.4 col-lg-2 forecast">
-                <div class="card text-white bg-primary mb-3" style="">
-                  <div class="card-header">Date</div>
-                  <div class=" day-forecast">
-                    <ul class="card-text" id="3">
-                      <li>icon</li>
-                      <li>temp</li>
-                      <li>humidity</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4 col-md-2 col-lg-2 forecast">
-                <div class="card text-white bg-primary mb-3">
-                  <div class="card-header">Date</div>
-                  <div class=" day-forecast">
-                    <ul class="card-text" id="4">
-                      <li>icon</li>
-                      <li>temp</li>
-                      <li>humidity</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4 col-md-2 col-lg-2 forecast">
-                <div class="card text-white bg-primary mb-3" style="">
-                  <div class="card-header">Date</div>
-                  <div class=" day-forecast">
-                    <ul class="card-text" id="5">
-                      <li>icon</li>
-                      <li>temp</li>
-                      <li>humidity</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end row for nested cards  -->
+            <h3 id="day-forecast ">5-Day Forecast:</h3>
+            <div class="row" id="five-day">
+            
+            <!-- 5-Day forecast goes here   -->
           
           </div>
         </div>
