@@ -41,7 +41,61 @@ function singleDay(chosenCity) {
     // ----------------- Add Current Weather Data to Page ------------------
 
     // City and Date ----------------
-    currentDate = moment().format("L");
+
+    var currentCondition = response.weather[0].main;
+    $("#current-icon").remove();
+    var currentDate = moment().format("L");
+    $("#current-date").text(response.name + " " + currentDate);
+
+    // ------ Condtions for weather icon
+    if (currentCondition === "Rain") {
+      var weatherIcon = $(
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/09d.png" />`
+      );
+      weatherIcon
+        .attr("style", "height: 60px; width: 60px")
+        .attr("class", "icon img");
+      $("#add-icon").prepend(weatherIcon);
+      console.log("rain");
+      console.log(weatherIcon);
+    }
+    if (currentCondition === "Clouds") {
+      var weatherIcon = $(
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/03d.png" />`
+      );
+      weatherIcon
+        .attr("style", "height: 60px; width: 60px")
+        .attr("class", "icon img");
+      $("#add-icon").prepend(weatherIcon);
+      console.log("clouds");
+    } else if (currentCondition === "Clear") {
+      var weatherIcon = $(
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/01d.png" />`
+      );
+      weatherIcon
+        .attr("style", "height: 60px; width: 60px")
+        .attr("class", "icon img");
+      $("#add-icon").prepend(weatherIcon);
+      console.log("clear");
+    } else if (currentCondition === "Drizzle") {
+      var weatherIcon = $(
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/10d.png" />`
+      );
+      weatherIcon
+        .attr("style", "height: 60px; width: 60px")
+        .attr("class", "icon img");
+      $("#add-icon").prepend(weatherIcon);
+    } else if (currentCondition === "Snow") {
+      var weatherIcon = $(
+        `<img id="current-icon" src="http://openweathermap.org/img/wn/13d.png" />`
+      );
+      weatherIcon
+        .attr("style", "height: 60px; width: 60px")
+        .attr("class", "icon img");
+      $("#add-icon").prepend(weatherIcon);
+      console.log(weatherIcon);
+    }
+
     $("#current-date").text(response.name + " " + currentDate);
     // Temperature -----------------
     tempKelvin = response.main.temp;
@@ -107,6 +161,7 @@ function singleDay(chosenCity) {
 
 $(".list-group-item").click(function () {
   console.log("click");
+  $("#current-icon").remove();
   chosenCity = $(this).text();
   console.log("list city", chosenCity);
   singleDay(chosenCity);
@@ -115,6 +170,7 @@ $(".list-group-item").click(function () {
 // When search button clicked, find city and retrieve info from API
 $(".btn").click(function (event) {
   event.preventDefault();
+  $("#current-icon").remove();
 
   chosenCity = $(this).parent().find("#search").val();
   console.log("chosen city", chosenCity);

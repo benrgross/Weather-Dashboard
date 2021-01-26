@@ -53,6 +53,7 @@ p {
 }
 
 .list-group-item {
+  clear: both;
   text-align: left;
   margin-left: 10px;
 }
@@ -123,6 +124,19 @@ footer {
 
 .uv-low {
   background-color: greenyellow;
+}
+
+#current-icon {
+  clear: both;
+  position: relative;
+  top: 5px;
+  left: 20px;
+}
+
+#current-date {
+  position: relative;
+  top: 20px;
+  float: left;
 }
 
 /* media only screen and (min-width: 993px) .row .col.l4 {
