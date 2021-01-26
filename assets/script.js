@@ -1,11 +1,82 @@
 // --- RetRETRIEVE WEATHER INFO ----
-// --- use api to retrieve info and store them in variables ?
+moment().format("L");
 
-// ----- SIDE NAV  ------
+// We then created an AJAX call
+var APIKey = "b833b868df96016cabebdb7a4ca15977";
+var storeCity = JSON.parse(localStorage.getItem("cities")) || [];
 
-// -- load previous cities searched from local storage
+function singleDay(chosenCity) {
+  // Here we are building the URL we need to query the database
+  var queryURL =
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    chosenCity +
+    "&appid=" +
+    APIKey;
+  // ajax call
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
 
-// -- connect to #search button with click/submit event
+    // add searched city to search result element
+    var addCity = $("<li>");
+    addCity.text(response.name).attr("class", "list-group-item");
+    $(".city").append(addCity);
+
+    // store city local storage
+    storeCity.push(response.name);
+    localStorage.setItem("cities", JSON.stringify(storeCity));
+
+    // ----------------- Add Current Weather Data to Page ------------------
+
+    // City and Date ----------------
+    currentDate = moment().format("L");
+    $("#current-date").text(response.name + " " + currentDate);
+    // Temperature -----------------
+    tempKelvin = response.main.temp;
+    temp = Math.round((Number(tempKelvin) - 273.15) * 1.8 + 32);
+    $("#temp").text("Temperature :" + temp + "°F");
+    console.log("temp", temp);
+
+    // Humidity ------------------
+    $("#hum").text("Humidity: " + response.main.humidity + " %");
+
+    // Wind ------------------------
+    $("#wind").text("Wind Speed: " + response.wind.speed + " mph");
+
+    //UV---------------
+  });
+}
+
+// load previously searched cities from local storage
+function getCities() {
+  for (i = 0; i < storeCity.length; i++) {
+    var addCity = $("<button>");
+    addCity.text(storeCity[i]).attr("class", "list-group-item");
+    $(".city").append(addCity);
+  }
+}
+
+getCities();
+
+// --------------- Button Events --------------------
+// When search button clicked, find city and retrieve info from API
+$(".btn").click(function (event) {
+  event.preventDefault();
+
+  chosenCity = $(this).parent().find("#search").val();
+  console.log("chosen city", chosenCity);
+
+  singleDay(chosenCity);
+});
+
+// Select city from list ----------------
+
+$(".list-group-item").click(function () {
+  chosenCity = $(this).text();
+  console.log("list city", chosenCity);
+});
 
 // -- connect to form and save text in variable chosenCity
 
@@ -52,25 +123,3 @@
 
 // a for each loop that matches card number to day number ?
 // all data come in a variable together or have to insert individual data
-
-//My api key
-var APIKey = "b833b868df96016cabebdb7a4ca15977";
-
-// Here we are building the URL we need to query the database
-var queryURL =
-  "https://api.openweathermap.org/data/2.5/weather?q=Bujumbura,Burundi&appid=" +
-  APIKey;
-
-// We then created an AJAX call
-$.ajax({
-  url: queryURL,
-  method: "GET",
-}).then(function (response) {
-  console.log(response);
-  // Create CODE HERE to Log the queryURL
-  // Create CODE HERE to log the resulting object
-  // Create CODE HERE to calculate the temperature (converted from Kelvin)
-  // Create CODE HERE to transfer content to HTML
-  // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
-  // Create CODE HERE to dump the temperature content into HTML
-});

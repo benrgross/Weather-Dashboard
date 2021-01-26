@@ -16,6 +16,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./assets/style.css" />
+    
     <title>Document</title>
   </head>
 
@@ -42,13 +43,14 @@
           <div class="col-sm-12 col-md-10 col-lg-10">
             <div class="input-group mb-3">
               <input
+                id="search"
                 type="search"
-                class="form-control"
+                class="form-control search"
                 placeholder="Search City"
                 aria-label="Recipient's username"
                 aria-describedby="button-addon2"
               />
-              <button type="submit" id="search" class="btn btn-primary">
+              <button type="submit"  class="btn btn-primary">
                 <i class="fas fa-search"></i>
               </button>
             </div>
@@ -57,13 +59,8 @@
           <!-- Search results  -->
           <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="card" id="city-list" style="width: auto">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
+              <ul class="list-group list-group-flush city">
+               
               </ul>
             </div>
           </div>
@@ -75,12 +72,12 @@
             <div class="col-sm-12">
               <div id="weather-box" class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Date(api) (current weather icon)</h5>
+                  <h5 class="card-title" id="current-date"></h5>
                   <ul class="card-text">
-                    <br><li>temperature </li> <br>  
-                    <li>humidity</li><br>
-                    <li>Wind Speed</li><br>
-                    <li>uv index <span id="uv-color">(color code)</span></li><br>
+                    <br><li id="temp"> </li> <br>  
+                    <li id="hum"></li><br>
+                    <li id="wind"></li><br>
+                    <li id="uv"><span id="uv-color">(color code)</span></li><br>
                   </ul>
                 </div>
               </div>
@@ -158,13 +155,18 @@
       </div>
       <footer class="footer mt-auto py-3""></footer>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script> src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-      crossorigin="anonymous"
-    </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript"> </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  
+   
+
     <script src="./assets/script.js"></script>
   </body>
 </html>
