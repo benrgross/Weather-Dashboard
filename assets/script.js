@@ -40,31 +40,31 @@ function singleDay(chosenCity) {
     // ------ Conditions for weather icon
     if (currentCondition === "Rain") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/09d.png" alt="rain-icon" />`
+        `<img id="current-icon" src="https://openweathermap.org/img/wn/09d.png" alt="rain-icon" />`
       );
       $("#add-icon").prepend(weatherIcon);
     }
     if (currentCondition === "Clouds") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/03d.png" alt="cloud-icon"/>`
+        `<img id="current-icon" src="https://openweathermap.org/img/wn/03d.png" alt="cloud-icon"/>`
       );
       $("#add-icon").prepend(weatherIcon);
       console.log("clouds");
     } else if (currentCondition === "Clear") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/01d.png" alt="sun-icon" />`
+        `<img id="current-icon" src="https://openweathermap.org/img/wn/01d.png" alt="sun-icon" />`
       );
       weatherIcon.attr("class", "icon img");
       $("#add-icon").prepend(weatherIcon);
       console.log("clear");
     } else if (currentCondition === "Drizzle") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/10d.png" alt="drizzle icon" />`
+        `<img id="current-icon" src="https://openweathermap.org/img/wn/10d.png" alt="drizzle icon" />`
       );
       $("#add-icon").prepend(weatherIcon);
     } else if (currentCondition === "Snow") {
       var weatherIcon = $(
-        `<img id="current-icon" src="http://openweathermap.org/img/wn/13d.png" alt="snow-icon" />`
+        `<img id="current-icon" src="https://openweathermap.org/img/wn/13d.png" alt="snow-icon" />`
       );
       $("#add-icon").prepend(weatherIcon);
     }
@@ -136,7 +136,12 @@ function fiveDayForecast(chosenCity) {
     "&units=imperial";
   // ajax call
   $.ajax({
-    url: fiveDayQueryURL,
+    url:
+      "https://api.openweathermap.org/data/2.5/forecast?q=" +
+      chosenCity +
+      "&appid=" +
+      APIKey +
+      "&units=imperial",
     method: "GET",
   }).then(function (response) {
     console.log(response);
@@ -170,23 +175,23 @@ function fiveDayForecast(chosenCity) {
 
       if (weatherConditions === "Clear") {
         var forecastIcon = $(
-          `<img class="icon-img" src="http://openweathermap.org/img/wn/01d.png" alt="sun-icon" />`
+          `<img class="icon-img" src="https://openweathermap.org/img/wn/01d.png" alt="sun-icon" />`
         );
       } else if (weatherConditions === "Clouds") {
         var forecastIcon = $(
-          `<img class="icon-img" src="http://openweathermap.org/img/wn/03d.png" alt="cloud-icon"/>`
+          `<img class="icon-img" src="https://openweathermap.org/img/wn/03d.png" alt="cloud-icon"/>`
         );
       } else if (weatherConditions === "Rain") {
         var forecastIcon = $(
-          `<img class="icon-img" src="http://openweathermap.org/img/wn/09d.png" alt="rain-icon" />`
+          `<img class="icon-img" src="https://openweathermap.org/img/wn/09d.png" alt="rain-icon" />`
         );
       } else if (weatherConditions === "Drizzle") {
         var forecastIcon = $(
-          `<img class="icon-img" src="http://openweathermap.org/img/wn/10d.png" alt="drizzle icon" />`
+          `<img class="icon-img" src="https://openweathermap.org/img/wn/10d.png" alt="drizzle icon" />`
         );
       } else if (weatherConditions === "Snow") {
         var forecastIcon = $(
-          `<img class="icon-img" src="http://openweathermap.org/img/wn/13d.png" alt="snow-icon" />`
+          `<img class="icon-img" src="https://openweathermap.org/img/wn/13d.png" alt="snow-icon" />`
         );
       }
       fiveDayDiv.append(date);
