@@ -13,9 +13,10 @@ function getCities() {
     $(".city").append(addCity);
   }
 }
+// init function
 getCities();
-// ajax call for sunday day forecast ----
 
+// ---- ajax call for single day day forecast ----
 function singleDay(chosenCity) {
   queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -29,16 +30,15 @@ function singleDay(chosenCity) {
   }).then(function (response) {
     console.log(response);
 
-    // ----------------- Add Current Weather Data to Page
+    // ----------------- Add Current Weather Data to Page ---------------------
 
-    // City and Date ----------------
-
+    //  ---------------- City and Date
     var currentCondition = response.weather[0].main;
     $("#current-icon").remove();
     var currentDate = moment().format("L");
     $("#current-date").text(response.name + " " + currentDate);
 
-    // ------ Conditions for weather icon
+    // ------ Conditions for weather icon on page ---------------------
     if (currentCondition === "Rain") {
       var weatherIcon = $(
         `<img id="current-icon" src="https://openweathermap.org/img/wn/09d.png" alt="rain-icon" />`
@@ -67,21 +67,21 @@ function singleDay(chosenCity) {
       );
       $("#add-icon").prepend(weatherIcon);
     }
-    // ----- City And Date ------------------
+    // --------------- City And Date -------------------
     $("#current-date").text(response.name + " " + "(" + currentDate + ")");
 
-    // Temperature -----------------
+    // ----------------- Temperature -----------------
     tempKelvin = response.main.temp;
     temp = Math.round((Number(tempKelvin) - 273.15) * 1.8 + 32);
     $("#temp").text("Temperature: " + temp + "°F");
 
-    // Humidity ------------------
+    // ------------------ Humidity --------------------
     $("#hum").text("Humidity: " + response.main.humidity + " %");
 
-    // Wind ------------------------
+    //-------------------- Wind ------------------------
     $("#wind").text("Wind Speed: " + response.wind.speed + " mph");
 
-    //UV---------------
+    //---------------------UV----------------------
     var lon = response.coord.lon;
     var lat = response.coord.lat;
     var APIkey = "b833b868df96016cabebdb7a4ca15977";
