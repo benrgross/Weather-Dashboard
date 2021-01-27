@@ -1,4 +1,4 @@
-// --- RetRETRIEVE WEATHER INFO ----
+// momment call for time stamp
 moment().format("L");
 
 //  AJAX call variables
@@ -14,6 +14,7 @@ function getCities() {
   }
 }
 getCities();
+// ajax call for sunday day forecast ----
 
 function singleDay(chosenCity) {
   queryURL =
@@ -28,7 +29,7 @@ function singleDay(chosenCity) {
   }).then(function (response) {
     console.log(response);
 
-    // ----------------- Add Current Weather Data to Page ------------------
+    // ----------------- Add Current Weather Data to Page
 
     // City and Date ----------------
 
@@ -49,14 +50,12 @@ function singleDay(chosenCity) {
         `<img id="current-icon" src="https://openweathermap.org/img/wn/03d.png" alt="cloud-icon"/>`
       );
       $("#add-icon").prepend(weatherIcon);
-      console.log("clouds");
     } else if (currentCondition === "Clear") {
       var weatherIcon = $(
         `<img id="current-icon" src="https://openweathermap.org/img/wn/01d.png" alt="sun-icon" />`
       );
       weatherIcon.attr("class", "icon img");
       $("#add-icon").prepend(weatherIcon);
-      console.log("clear");
     } else if (currentCondition === "Drizzle") {
       var weatherIcon = $(
         `<img id="current-icon" src="https://openweathermap.org/img/wn/10d.png" alt="drizzle icon" />`
@@ -75,7 +74,6 @@ function singleDay(chosenCity) {
     tempKelvin = response.main.temp;
     temp = Math.round((Number(tempKelvin) - 273.15) * 1.8 + 32);
     $("#temp").text("Temperature: " + temp + "°F");
-    console.log("temp", temp);
 
     // Humidity ------------------
     $("#hum").text("Humidity: " + response.main.humidity + " %");
@@ -98,7 +96,7 @@ function singleDay(chosenCity) {
       url: uvURL,
       method: "GET",
     }).then(function (response) {
-      console.log("uv", response.value);
+      console.log(response);
       $("#uv").text("UV-Index:    ");
 
       if (response.value <= 2) {
@@ -146,14 +144,12 @@ function fiveDayForecast(chosenCity) {
   }).then(function (response) {
     console.log(response);
     forecast = response.list;
-    console.log("forecast", forecast);
 
     // --------------------empty div
     $("#five-day").empty();
 
     // --------------------make for loop
     for (i = 0; i < forecast.length; i += 8) {
-      console.log("response.list[i]", response.list[i].dt_txt);
       //------------------make div
       fiveDayDiv = $(
         "<div class='card shadow text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>"
@@ -166,7 +162,7 @@ function fiveDayForecast(chosenCity) {
       var temp = forecast[i].main.temp;
       var humidity = forecast[i].main.humidity;
 
-      // construct elements
+      // ------------------ construct elements
       disDate = $("<h5 class:'card-title'>").text(date);
       disTemp = $("<p class='card-text'>").text("Temperature: " + temp + "°F");
       disHum = $("<p class='card-text'>").text("Humidity: " + humidity + "%");
@@ -205,23 +201,22 @@ function fiveDayForecast(chosenCity) {
 
 // --------------- Button Events --------------------
 
+// ----- renders forecast when history buttons are pressed
 function renderCityHistory() {
   $(".list-group-item").click(function () {
-    console.log("click");
     $("#current-icon").remove();
     $("#temp").text("");
     $("#hum").text("");
     $("#wind").text("");
     $("#uv").text("");
     chosenCity = $(this).text();
-    console.log("list city", chosenCity);
     singleDay(chosenCity);
     fiveDayForecast(chosenCity);
   });
 }
 renderCityHistory();
 
-// When search button clicked, find city and retrieve info from API
+// When search button clicked, find city save it to local storage and retrieve info from API
 $(".btn").click(function (event) {
   event.preventDefault();
   // clear old data
@@ -232,7 +227,6 @@ $(".btn").click(function (event) {
   $("#uv").empty();
 
   chosenCity = $(this).parent().find("#search").val();
-  console.log("chosen city", chosenCity);
 
   if (chosenCity) {
     var addCity = $("<button>");
@@ -248,51 +242,3 @@ $(".btn").click(function (event) {
   singleDay(chosenCity);
   fiveDayForecast(chosenCity);
 });
-
-// Select city from list ----------------
-
-// -- connect to form and save text in variable chosenCity
-
-// -- store cities searched in local storage.
-
-//---- click event appends chosenCity  #city-ul
-
-// ----- BUILD ELEMENT FOR CITY LIST AND APPEND -----
-
-// BUILD -- > <div class="col-sm-12 col-md-12 col-lg-12">
-
-// <div class="card" id="city-list" style="width: auto">
-//   <ul class="list-group list-group-flush" id="city-ul">
-//   </ul>
-// </div>
-
-//  Append to #search-col
-
-// BUILD list items:
-// <li class="list-group-item">chosenCity</li>
-
-// APPEND to #city-ul
-
-//---- CURRENT WEATHER INFO -------
-
-// when city is submitted -- onlick submit event from search bar - > retrieve current weather info
-
-//----- CREATE/BUILD/APPEND WEATHER DATA INTO WEATHER-BOX -----
-
-// Connect to-- > id="temp-current"
-// $("#temp-current").text(current weather  temp data)
-
-// Connect to ----> id="hum-current"
-// $("#hum-current").text(current weather humidity data)
-
-// Connect to ----> id="wind-current"
-// $("#wind-current").text(current weather wind data)
-
-// Connect to ----> id="uv current" and id= #uv-color
-// $("#uv-current").text(current weather wind data)
-// or $("#uv-color").text (uv with indicator color)
-
-// ------------- DISPLAY INFO IN 5 DAY FORECAST ------------
-
-// a for each loop that matches card number to day number ?
-// all data come in a variable together or have to insert individual data
