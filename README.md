@@ -4,6 +4,6 @@ The Weather Dashboard website is designed to give you up to date weather forecas
 
 The app utilizes the Open Weather API with three different endpoints, in order to obtain: current weather, the 5 day forecast and UV indexes. jQuery Ajax calls were deployed to navigate the response form the API and jQuery was use to dynamically build and update displays on the screen. Local storage was used to store the previous cities the user searched and Bootstrap CSS framework was implemented to achieve an elegant layout.
 
-Link To Webpage: https://github.com/benrgross/Weather-Dashboard
-
 ![alt-text](/images/Weather-Dash.gif)
+
+Link To Webpage: https://github.com/benrgross/Weather-Dashboard
