@@ -7,3 +7,5 @@ The app utilizes the Open Weather API and three separate endpoints. The api allo
 ![alt-text](/images/Weather-Dash.gif)
 
 Link To Webpage: https://benrgross.github.io/Weather-Dashboard/
+
+email: benrgross@gmail.com
